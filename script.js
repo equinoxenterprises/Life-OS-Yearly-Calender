@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const now = new Date();
     const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth(); // 0-11
+    const currentMonth = now.getMonth();
     const currentDate = now.getDate();
 
     // Set Header Year dynamically
@@ -9,12 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const quartersContainer = document.getElementById("quarters-container");
 
-    // Quarter definitions (Months grouped by 3)
     const quarters = [
-        { name: "Quarter I", months: [0, 1, 2] },     // Jan, Feb, Mar
-        { name: "Quarter II", months: [3, 4, 5] },    // Apr, May, Jun
-        { name: "Quarter III", months: [6, 7, 8] },   // Jul, Aug, Sep
-        { name: "Quarter IV", months: [9, 10, 11] }   // Oct, Nov, Dec
+        { name: "Quarter I", months: [0, 1, 2] },
+        { name: "Quarter II", months: [3, 4, 5] },
+        { name: "Quarter III", months: [6, 7, 8] },
+        { name: "Quarter IV", months: [9, 10, 11] }
     ];
 
     const monthNames = [
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
             let tableRows = "";
             let dayCount = 1;
 
-            // Build calendar grid rows
             for (let i = 0; i < 6; i++) {
                 let row = "<tr>";
                 let isRowEmpty = true;
@@ -52,20 +50,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                        dayCount === currentDate);
                         
                         let className = isToday ? "today" : "";
-                        row += `<td class="${className}">${dayCount}</td>`;
+                        // Store full date string data attribute for interactive clicking
+                        row += `<td class="${className}" data-year="${currentYear}" data-month="${monthIndex}" data-day="${dayCount}">${dayCount}</td>`;
                         dayCount++;
                         isRowEmpty = false;
                     }
                 }
                 row += "</tr>";
 
-                // Stop creating unnecessary empty trailing rows
                 if (!isRowEmpty) {
                     tableRows += row;
                 }
             }
 
-            // Build mini table headers for days
             let dayHeaders = dayNames.map(d => `<th>${d}</th>`).join("");
 
             monthsHTML += `
@@ -80,9 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         quartersHTML += `
-            <div class="quarter-card">
+            <div class="quarter-section">
                 <h2 class="quarter-title">${quarter.name}</h2>
-                <div class="months-container">
+                <div class="months-row">
                     ${monthsHTML}
                 </div>
             </div>
@@ -90,4 +87,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     quartersContainer.innerHTML = quartersHTML;
+
+    // --- Interactive Date Click & Modal Logic ---
+    const modal = document.getElementById("date-modal");
+    const closeModal = document.getElementById("close-modal");
+    const modalTitle = document.getElementById("modal-date-title");
+    const modalNotes = document.getElementById("modal-notes");
+    const saveNotesBtn = document.getElementById("save-notes");
+
+    let selectedCell = null;
+    let savedNotesData = JSON.parse(localStorage.getItem("calendar_notes") || "{}");
+
+    document.querySelectorAll(".month-table td:not(.empty)").forEach(cell => {
+        cell.addEventListener("click", (e) => {
+            if (selectedCell) selectedCell.classList.remove("selected");
+            selectedCell = e.target;
+            selectedCell.classList.add("selected");
+
+            const y = selectedCell.getAttribute("data-year");
+            const m = parseInt(selectedCell.getAttribute("data-month"));
+            const d = selectedCell.getAttribute("data-day");
+
+            const dateKey = `${y}-${m}-${d}`;
+            const formattedDateStr = `${monthNames[m]} ${d}, ${y}`;
+
+            modalTitle.textContent = formattedDateStr;
+            modalNotes.value = savedNotesData[dateKey] || "";
+            modal.classList.add("active");
+        });
+    });
+
+    closeModal.addEventListener("click", () => {
+        modal.classList.remove("active");
+    });
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("active");
+    });
+
+    saveNotesBtn.addEventListener("click", () => {
+        if (selectedCell) {
+            const y = selectedCell.getAttribute("data-year");
+            const m = selectedCell.getAttribute("data-month");
+            const d = selectedCell.getAttribute("data-day");
+            const dateKey = `${y}-${m}-${d}`;
+
+            savedNotesData[dateKey] = modalNotes.value;
+            localStorage.setItem("calendar_notes", JSON.stringify(savedNotesData));
+            
+            saveNotesBtn.textContent = "Saved!";
+            setTimeout(() => {
+                saveNotesBtn.textContent = "Save Note";
+                modal.classList.remove("active");
+            }, 600);
+        }
+    });
 });
