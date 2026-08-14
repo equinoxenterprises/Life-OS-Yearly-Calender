@@ -1,0 +1,184 @@
+:root {
+    --bg-primary: #F7F4EF;
+    --bg-card: #FAF8F5;
+    --chocolate-dark: #3D2C22;
+    --chocolate-mid: #5C4335;
+    --chocolate-light: #8C6D58;
+    --accent-beige: #E6DFD3;
+    --border-color: #DCD4C5;
+    --text-muted: #9E8D80;
+    --today-bg: #4A3B32;
+    --today-color: #FAF8F5;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--chocolate-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Wall Hanging Container */
+.wall-hanging-container {
+    position: relative;
+    background-color: var(--bg-card);
+    width: 100%;
+    max-width: 1100px;
+    padding: 50px 40px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(61, 44, 34, 0.08), 
+                0 2px 6px rgba(61, 44, 34, 0.04);
+    border: 1px solid var(--border-color);
+}
+
+/* Hanging details */
+.hanging-string {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 25px;
+    background-color: var(--chocolate-light);
+}
+
+.hanging-clip {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 10px;
+    background-color: var(--chocolate-mid);
+    border-radius: 4px;
+}
+
+/* Header */
+.calendar-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.brand-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.calendar-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: var(--chocolate-dark);
+    letter-spacing: 2px;
+}
+
+.divider-line {
+    width: 60px;
+    height: 1px;
+    background-color: var(--chocolate-light);
+    margin: 15px auto 0;
+}
+
+/* Quarters Grid (2x2 layout) */
+.quarters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+@media (max-width: 850px) {
+    .quarters-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Individual Quarter Card */
+.quarter-card {
+    background: #FFF;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(61, 44, 34, 0.02);
+}
+
+.quarter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--chocolate-dark);
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--accent-beige);
+    padding-bottom: 8px;
+}
+
+/* Months Row inside Quarter */
+.months-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 600px) {
+    .months-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Month Mini Table */
+.month-block h3 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--chocolate-mid);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.month-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.month-table th {
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    padding-bottom: 4px;
+}
+
+.month-table td {
+    font-size: 0.75rem;
+    padding: 4px 0;
+    color: var(--chocolate-dark);
+    font-weight: 300;
+}
+
+.month-table td.empty {
+    pointer-events: none;
+}
+
+/* Today's Date Highlight */
+.month-table td.today {
+    background-color: var(--today-bg);
+    color: var(--today-color);
+    border-radius: 50%;
+    font-weight: 500;
+}
