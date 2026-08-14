@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quarterly Wall Hanging Calendar</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts for Aesthetic Typography -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -13,21 +13,33 @@
 <body>
 
     <div class="wall-hanging-container">
-        <!-- Brass Hanging Clip / Top Accent -->
+        <!-- Hanging Details -->
         <div class="hanging-clip"></div>
         <div class="hanging-string"></div>
 
-        <!-- Calendar Header -->
+        <!-- Header -->
         <header class="calendar-header">
-            <span class="brand-subtitle">AESTHETIC LIVING</span>
+            <span class="brand-subtitle">QUARTERLY PLANNER</span>
             <h1 id="calendar-year">2026</h1>
             <div class="divider-line"></div>
         </header>
 
-        <!-- 4 Quarters Grid -->
+        <!-- 4 Quarters Seamless Layout -->
         <main class="quarters-grid" id="quarters-container">
             <!-- Dynamically injected via JavaScript -->
         </main>
+    </div>
+
+    <!-- Interactive Date Modal / Note Drawer -->
+    <div id="date-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button id="close-modal" class="close-btn">&times;</button>
+            <span id="modal-date-subtitle" class="modal-subtitle">Selected Date</span>
+            <h2 id="modal-date-title">January 1, 2026</h2>
+            <div class="modal-divider"></div>
+            <textarea id="modal-notes" placeholder="Write your daily notes or intentions here..."></textarea>
+            <button id="save-notes" class="save-btn">Save Note</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
