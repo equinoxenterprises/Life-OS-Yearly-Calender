@@ -1,14 +1,16 @@
 :root {
-    --bg-primary: #F7F4EF;
+    --bg-primary: #F4F0EA;
     --bg-card: #FAF8F5;
-    --chocolate-dark: #3D2C22;
-    --chocolate-mid: #5C4335;
-    --chocolate-light: #8C6D58;
-    --accent-beige: #E6DFD3;
-    --border-color: #DCD4C5;
+    --chocolate-dark: #3A2E2B;
+    --chocolate-mid: #5A4A42;
+    --chocolate-light: #8C7A70;
+    --accent-beige: #EBE3D5;
+    --border-subtle: #E8E1D7;
     --text-muted: #9E8D80;
-    --today-bg: #4A3B32;
+    --today-bg: #3A2E2B;
     --today-color: #FAF8F5;
+    --selected-bg: #D4C5B9;
+    --selected-color: #3A2E2B;
 }
 
 * {
@@ -25,7 +27,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 40px 20px;
+    padding: 50px 20px;
 }
 
 /* Wall Hanging Container */
@@ -33,122 +35,121 @@ body {
     position: relative;
     background-color: var(--bg-card);
     width: 100%;
-    max-width: 1100px;
-    padding: 50px 40px;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(61, 44, 34, 0.08), 
-                0 2px 6px rgba(61, 44, 34, 0.04);
-    border: 1px solid var(--border-color);
+    max-width: 1200px;
+    padding: 60px 50px;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(58, 46, 43, 0.06), 
+                0 4px 12px rgba(58, 46, 43, 0.03);
+    border: 1px solid var(--border-subtle);
 }
 
 /* Hanging details */
 .hanging-string {
     position: absolute;
-    top: -25px;
+    top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
-    height: 25px;
+    width: 1.5px;
+    height: 30px;
     background-color: var(--chocolate-light);
 }
 
 .hanging-clip {
     position: absolute;
-    top: -32px;
+    top: -38px;
     left: 50%;
     transform: translateX(-50%);
-    width: 16px;
+    width: 18px;
     height: 10px;
     background-color: var(--chocolate-mid);
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 /* Header */
 .calendar-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .brand-subtitle {
     font-size: 0.75rem;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     color: var(--text-muted);
     font-weight: 500;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .calendar-header h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
+    font-size: 3.8rem;
     font-weight: 400;
     color: var(--chocolate-dark);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 .divider-line {
-    width: 60px;
+    width: 50px;
     height: 1px;
     background-color: var(--chocolate-light);
     margin: 15px auto 0;
+    opacity: 0.6;
 }
 
-/* Quarters Grid (2x2 layout) */
+/* Quarters Grid (Seamless 2x2 layout without any boundary boxes) */
 .quarters-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    gap: 60px 50px;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
     .quarters-grid {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
 }
 
-/* Individual Quarter Card */
-.quarter-card {
-    background: #FFF;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: 0 4px 12px rgba(61, 44, 34, 0.02);
+/* Individual Quarter Section */
+.quarter-section {
+    display: flex;
+    flex-direction: column;
 }
 
 .quarter-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 600;
     color: var(--chocolate-dark);
-    text-align: center;
-    margin-bottom: 16px;
-    letter-spacing: 1px;
-    border-bottom: 1px solid var(--accent-beige);
+    text-align: left;
+    margin-bottom: 24px;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid var(--border-subtle);
     padding-bottom: 8px;
 }
 
-/* Months Row inside Quarter */
-.months-container {
+/* Months Container (3 months side-by-side inside each quarter) */
+.months-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 }
 
-@media (max-width: 600px) {
-    .months-container {
+@media (max-width: 650px) {
+    .months-row {
         grid-template-columns: 1fr;
     }
 }
 
-/* Month Mini Table */
+/* Month Mini Table Block */
 .month-block h3 {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 500;
     text-align: center;
     color: var(--chocolate-mid);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .month-table {
@@ -161,24 +162,146 @@ body {
     font-size: 0.65rem;
     font-weight: 400;
     color: var(--text-muted);
-    padding-bottom: 4px;
+    padding-bottom: 6px;
 }
 
 .month-table td {
     font-size: 0.75rem;
-    padding: 4px 0;
+    padding: 5px 0;
     color: var(--chocolate-dark);
     font-weight: 300;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.month-table td:not(.empty):hover {
+    background-color: var(--accent-beige);
+    border-radius: 50%;
 }
 
 .month-table td.empty {
     pointer-events: none;
 }
 
-/* Today's Date Highlight */
+/* Today & Selected Styles */
 .month-table td.today {
     background-color: var(--today-bg);
     color: var(--today-color);
     border-radius: 50%;
     font-weight: 500;
+}
+
+.month-table td.selected {
+    background-color: var(--selected-bg);
+    color: var(--selected-color);
+    border-radius: 50%;
+    font-weight: 500;
+}
+
+/* Interactive Note Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(58, 46, 43, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: var(--bg-card);
+    width: 100%;
+    max-width: 420px;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(58, 46, 43, 0.1);
+    position: relative;
+    border: 1px solid var(--border-subtle);
+    transform: translateY(15px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--chocolate-dark);
+    cursor: pointer;
+}
+
+.modal-subtitle {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.modal-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--chocolate-dark);
+    margin-top: 4px;
+}
+
+.modal-divider {
+    width: 30px;
+    height: 1px;
+    background: var(--chocolate-light);
+    margin: 15px 0;
+}
+
+.modal-card textarea {
+    width: 100%;
+    height: 110px;
+    background: #FFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 12px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--chocolate-dark);
+    resize: none;
+    outline: none;
+}
+
+.modal-card textarea:focus {
+    border-color: var(--chocolate-light);
+}
+
+.save-btn {
+    width: 100%;
+    background-color: var(--chocolate-dark);
+    color: var(--bg-card);
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.save-btn:hover {
+    background-color: var(--chocolate-mid);
 }
